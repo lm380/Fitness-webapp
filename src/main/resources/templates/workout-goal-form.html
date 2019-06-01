@@ -88,7 +88,7 @@
     <div class="col-sm-8 text-left"> 
     
     <h3>Workout goals</h3>
-	<form class="form-horizontal" action="#" th:action="@{/client/processWorkoutGoals}" th:object="${client}" method="post">
+	<form class="form-horizontal" method="post" th:action="@{/client/processWorkoutGoals}" th:object="${client}">
 <fieldset>
 
 		<input type="hidden" th:field="*{roles}"/>
@@ -161,7 +161,9 @@
 	<div class="form-group">
   <label class="col-md-4 control-label"></label>
   <div class="col-md-4">
-    <button type="submit" class="btn btn-success" >Submit <span class="glyphicon glyphicon-send"></span></button>
+    <button type="submit" class="btn btn-success"
+            onclick = "if(!(confirm('Updating your goals will clear your created exercises do you want to continue?'))
+            ) return false"> >Submit <span class="glyphicon glyphicon-send"></span></button>
   </div>
 </div>
 </fieldset>
