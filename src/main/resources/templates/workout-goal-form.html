@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+		xmlns:sec= "http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	
+	<title>Workout Goals</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Reference Bootstrap files -->
+	<link rel="stylesheet"
+		 href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	 <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/nutrition/targets">Current nutrition targets</a></li>
+        <li><a href="/client/currentRoutine">Current Gym routine</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Sign-out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid text-center">   
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p><a href="/exercise/exerciseFormForAdd">Add an exercise</a></p>
+      <p><a href="/nutrition/showForm">Update nutrition information</a></p>
+      <p><a href="/client/updateWorkoutGoals">Update workout targets</a></p>
+      <div sec:authorize="hasRole('ROLE_ADMIN')">
+		<a href="/admin/list">User List</a>
+	  </div>
+    </div>
+    <div class="col-sm-8 text-left"> 
+    
+    <h3>Workout goals</h3>
+	<form class="form-horizontal" action="#" th:action="@{/client/processWorkoutGoals}" th:object="${client}" method="post">
+<fieldset>
+
+		<input type="hidden" th:field="*{roles}"/>
+		<input type="hidden" th:field="*{age}"/>
+		<input type="hidden" th:field="*{id}"/>
+		<input type="hidden" th:field="*{firstName}"/>
+		<input type="hidden" th:field="*{lastName}"/>
+		<input type="hidden" th:field="*{email}"/>
+		<input type="hidden" th:field="*{username}"/>
+		<input type="hidden" th:field="*{password}"/>
+		<input type="hidden" th:field="*{gender}"/>
+		<input type="hidden" th:field="*{calories}"/>
+		<input type="hidden" th:field="*{weight}"/>
+		<input type="hidden" th:field="*{height}"/>
+		<input type="hidden" th:field="*{activityLevel}"/>
+		<input type="hidden" th:field="*{nutritionGoal}"/>
+        <input type="hidden" th:field="*{exercises}"/>
+        <input type="hidden" th:field="*{protein}"/>
+        <input type="hidden" th:field="*{carbs}"/>
+        <input type="hidden" th:field="*{fat}"/>
+
+		
+<div class="form-group">
+  <label class="col-md-4 control-label">How many days are you going to the gym in a week?</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="gym_days" th:field="*{gymDays}" id="gym_days" placeholder="Gym Days" class="form-control" type="text">
+    </div>
+    <p th:if="${#fields.hasErrors('gymDays')}" th:errors="*{gymDays}" class="text-danger"></p>
+  </div>
+</div>	
+
+<div class="form-group"> 
+  <label class="col-md-4 control-label">Are you trying to build strength or enhance your physique?</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="gym_goal" th:field ="*{gymGoal}" id="gym_goal" class="form-control selectpicker" >
+			<option value="aesthetics">Aesthetics</option>
+			<option value="strength">Build strength</option>
+    </select>
+  </div>
+</div>
+</div>
+
+<div class="form-group"> 
+  <label class="col-md-4 control-label">Is there a new particular muscle you would like to target?</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="target_muscle" th:field="*{targetMuscle}" id="target_muscle" class="form-control selectpicker" >
+      <option
+	value="Abs">Abs</option>
+	<option
+	value="Legs">Legs</option>
+	<option
+	value="Chest">Chest</option>
+	<option
+	value="Back">Back</option>
+	<option
+	value="Arms">Arms</option>
+	<option
+	value="Delts">Shoulders</option>
+    </select>
+  </div>
+</div>
+</div>
+
+	<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-success" >Submit <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+</fieldset>
+</form>
+
+</div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

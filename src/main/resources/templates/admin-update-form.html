@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	
+	<title>Registration Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Reference Bootstrap files -->
+	<link rel="stylesheet"
+		 href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+	
+	<h3>Sign Up!</h3>
+    <form class="well form-horizontal" action="#" th:action="@{/admin/updateClient}" th:object="${theClient}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+<fieldset>
+
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">First Name</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="first_name" th:field="*{firstName}" id="first_name" placeholder="First Name" class="form-control" type="text">
+    </div>
+    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></p>
+  </div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label" >Last Name</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="last_name" th:field="*{lastName}" id="last_name" placeholder="Last Name" class="form-control"  type="text">
+  
+    </div>
+     <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></p>
+  </div> 
+</div>
+
+<!-- Text input-->
+       
+<div class="form-group">
+  <label class="col-md-4 control-label">Username</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input name="user_name" th:field="*{username}" id="user_name" placeholder="Username" class="form-control" type="text">
+    </div>
+     <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></p>
+      <span th:text="${usernameError}" class = "errors"></span> 
+  </div>
+</div>
+
+<!-- Text input-->
+      
+<div class="form-group">
+  <label class="col-md-4 control-label">Password</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+  <input name="password" th:field="*{password}" id="password" placeholder="Password" class="form-control" type="password">
+    </div>
+     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></p>
+  </div>
+</div>
+
+<div class="form-group"> 
+  <label class="col-md-4 control-label">Role</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="role" id="role" class="form-control selectpicker" >
+      <option
+	value="CLIENT">Client</option>
+	<option
+	value="ADMIN">Admin</option>
+    </select>
+  </div>
+</div>
+</div>
+
+<!-- Text input-->
+
+       <div class="form-group">
+  <label class="col-md-4 control-label">E-Mail</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email" th:field="*{email}" id="email" placeholder="E-Mail Address" class="form-control"  type="text">
+    </div>
+     <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></p>
+  </div>
+</div>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Height(cm)</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-sunglasses"></i></span>
+  <input name="height" th:field="*{height}" id="height" placeholder="Height(cm)" class="form-control"  type="text">
+   		 </div>
+   		  <p th:if="${#fields.hasErrors('height')}" th:errors="*{height}" class="text-danger"></p>
+	</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label">Weight(kg)</label>  
+   <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-scale"></i></span>
+  <input name="weight" th:field="*{weight}" id="weight" placeholder="Weight(kg)" class="form-control" type="text">
+    </div>
+     <p th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" class="text-danger"></p>
+  </div>
+</div>
+
+<!-- radio checks -->
+ <div class="form-group">
+                        <label class="col-md-4 control-label">Sex</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" th:field="*{gender}" id="gender" value ="male"/> Male
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" th:field="*{gender}" id="gender" value ="female"/> Female
+                                </label>
+                                 <p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="text-danger"></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+<!-- Text area -->
+  
+<div class="form-group">
+  <label class="col-md-4 control-label">Age</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        	<input name="age" th:field="*{age}" id="age" placeholder="Age" class="form-control">
+  		</div>
+  		 <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="text-danger"></p>
+  </div>
+</div>
+
+
+<!-- Text input-->
+ 
+<div class="form-group">
+  <label class="col-md-4 control-label">How many days will you realistically get to the gym every week?</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+  <select name="gym_days" th:field="*{gymDays}" id="gym_days" class="form-control">
+  	 <option
+	value="3">3</option>
+	<option
+	value="4">4</option>
+	<option
+	value="5">5</option>
+	<option
+	value="6">6</option>
+	<option
+	value="7">7</option>
+    </select>
+    </div>
+     <p th:if="${#fields.hasErrors('gymDays')}" th:errors="*{gymDays}" class="errors"></p>
+  </div>
+</div>
+<!-- Select Basic -->
+   
+<div class="form-group"> 
+  <label class="col-md-4 control-label">What's your goal in the gym?</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="gym_goal" th:field="*{gymGoal}" id="gym_goal" class="form-control selectpicker" >
+      <option
+	value="aesthetics">Aesthetics</option>
+	<option
+	value="strength">Build strength</option>
+    </select>
+  </div>
+</div>
+</div>
+
+<div class="form-group"> 
+  <label class="col-md-4 control-label">Is there a particular muscle you would like to target?</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="target_muscle" th:field="*{targetMuscle}" id="target_muscle" class="form-control selectpicker" >
+     <option
+	value="Abs">Abs</option>
+	<option
+	value="Legs">Legs</option>
+	<option
+	value="Chest">Chest</option>
+	<option
+	value="Back">Back</option>
+	<option
+	value="Arms">Arms</option>
+	<option
+	value="Delts">Shoulders</option>
+    </select>
+  </div>
+</div>
+</div>
+
+
+<!-- select option -->
+<div class="form-group"> 
+  <label class="col-md-4 control-label">What's your estimated activity level?</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="activity_level" th:field ="*{activityLevel}" id="activity_level" class="form-control selectpicker" >
+			<option value ="1">1(Sedentary - desk job and little to no exercise)</option>
+			<option value ="2">2(Lightly Active - light exercise/sports 1-3 days/week)</option>
+			<option value ="3">3(Moderately Active - moderate exercise/sports 4-5 days/week)</option>
+			<option value ="4">4(Very Active - hard exercise/sports 6-7 days/week)</option>
+    </select>
+  </div>
+</div>
+</div>
+
+<!-- select option -->
+<div class="form-group"> 
+  <label class="col-md-4 control-label">What dietary cycle would you like to start?</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    	<select name="nutrition_goal" id="nutrition_goal" th:field ="*{nutritionGoal}" class="form-control selectpicker" >
+			<option value = "Gain">Gain
+			<option value = "Cut">Cut
+			<option value = "Maintain">Maintain
+		</select>
+  </div>
+</div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-success" >Submit <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+
+
+</fieldset>
+</form>
+</div>
+    </div>
+</body>
+</html>    
+ 

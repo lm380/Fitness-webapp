@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec= "http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/expanding.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/expanding.js"></script>
+    <title>Aesthetic Routine</title>
+    <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 1970px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+   /* footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+   */ }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;}
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/nutrition/targets">Current nutrition targets</a></li>
+                <li><a href="/client/currentRoutine">Current Gym routine</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Sign-out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+            <p><a href="/exercise/exerciseFormForAdd">Add an exercise</a></p>
+            <p><a href="/nutrition/showForm">Update nutrition information</a></p>
+            <p><a href="/client/updateWorkoutGoals">Update workout targets</a></p>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/admin/list">User List</a>
+            </div>
+        </div>
+        <div class="col-sm-8 text-left">
+            <h2>Aesthetics Routine</h2>
+
+            <br>
+            <article class='item'>
+                <header><h3>Push Day 1</h3></header>
+                <section class='content'>
+                    <span th:text="${theClient.getExercisesUsed()[40].getExerciseName()}"></span> - 10 reps of each movement<br>
+                    <span th:text="${theClient.getExercisesUsed()[4].getExerciseName()}"></span> - 5 reps, 5 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[5].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[37].getExerciseName()}"></span> - 10 reps, 3 sets (attachment low)<br>
+                    <span th:text="${theClient.getExercisesUsed()[37].getExerciseName()}"></span> - 10 reps, 3 sets (attachment middle)<br>
+                    <span th:text="${theClient.getExercisesUsed()[37].getExerciseName()}"></span> - 10 reps, 3 sets (attachment high)<br>
+                    <span th:text="${theClient.getExercisesUsed()[38].getExerciseName()}"></span> - 8-12 reps (add weight if bodyweight is too easy in this range), 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[16].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[41].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[2].getExerciseName()}"></span> -Superset with-
+                    <span th:text="${theClient.getExercisesUsed()[39].getExerciseName()}"></span> 8-12 reps, 3 sets<br>
+                    <th:block th:each="exercise : ${theClient.getExercises()}">
+                        <th:block th:if="${exercise.getWorkoutDay().contains('Push day 1')}" th:utext="${exercise.getExerciseName() + '<br>'}"></th:block>
+                    </th:block>
+                </section>
+                <footer></footer>
+            </article>
+
+
+            <article class='item'>
+                <header><h3>Pull Day 1</h3></header>
+                <section class='content'>
+                    <span th:text="${theClient.getExercisesUsed()[0].getExerciseName()}"></span> warm up - 10 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[1].getExerciseName()}"></span> warm up - 10 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[10].getExerciseName()}"></span> - 5 reps, 5 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[11].getExerciseName()}"></span> - 8-12 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[12].getExerciseName()}"></span> - 8-12 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[13].getExerciseName()}"></span> - 8-12 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[21].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[33].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[35].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[23].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[42].getExerciseName()}"></span> -Superset with-
+                    <span th:text="${theClient.getExercisesUsed()[44].getExerciseName()}"></span> - 8-12 reps, 3 sets<br>
+                    <th:block th:each="exercise : ${theClient.getExercises()}">
+                        <th:block th:if="${exercise.getWorkoutDay().contains('Pull day 1')}" th:utext="${exercise.getExerciseName() + '<br>'}"></th:block>
+                    </th:block>
+                </section>
+                <footer></footer>
+            </article>
+
+            <article class='item'>
+                <header><h3>Leg Day 1</h3></header>
+                <section class='content'>
+                    <span th:text="${theClient.getExercisesUsed()[27].getExerciseName()}"></span> warm up - 10 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[28].getExerciseName()}"></span> warm up - 10 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[26].getExerciseName()}"></span> - 5 reps, 5 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[30].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[31].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[29].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[45].getExerciseName()}"></span> - 12-15 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[18].getExerciseName()}"></span> -Superset with-
+                    <span th:text="${theClient.getExercisesUsed()[19].getExerciseName()}"></span> - 12-15 reps, 3 sets<br>
+                    <th:block th:each="exercise : ${theClient.getExercises()}">
+                        <th:block th:if="${exercise.getWorkoutDay().contains('Leg day 1')}" th:utext="${exercise.getExerciseName() + '<br>'}"></th:block>
+                    </th:block>
+                </section>
+                <footer></footer>
+            </article>
+
+            <article class='item'>
+                <header><h3>Push Day 2</h3></header>
+                <section class = 'content'>
+                    <span th:text="${theClient.getExercisesUsed()[40].getExerciseName()}"></span> - 10 reps of each movement<br>
+                    <span th:text="${theClient.getExercisesUsed()[5].getExerciseName()}"></span> - 5 reps, 5 sets <br>
+                    <span th:text="${theClient.getExercisesUsed()[4].getExerciseName()}"></span> - 8-12 reps, 4 sets <br>
+                    <span th:text="${theClient.getExercisesUsed()[15].getExerciseName()}"></span> - 8-12 reps, 3 sets and a triple drop set <br>
+                    <span th:text="${theClient.getExercisesUsed()[46].getExerciseName()}"></span> - 8-12 reps, 4 sets <br>
+                    <span th:text="${theClient.getExercisesUsed()[38].getExerciseName()}"></span> - 8-12 reps (add weight if bodyweight is too easy in this range), 4 sets <br>
+                    <span th:text="${theClient.getExercisesUsed()[16].getExerciseName()}"></span> - 8-12 reps, 4 sets <br>
+                    <span th:text="${theClient.getExercisesUsed()[20].getExerciseName()}"></span> - 8-12 reps, 4 sets <br>
+                    <span th:text="${theClient.getExercisesUsed()[2].getExerciseName()}"></span> -Superset with-
+                    <span th:text="${theClient.getExercisesUsed()[39].getExerciseName()}"></span> 8-12 reps, 3 sets <br>
+                    <th:block th:each="exercise : ${theClient.getExercises()}">
+                        <th:block th:if="${exercise.getWorkoutDay().contains('Push day 2')}" th:utext="${exercise.getExerciseName() + '<br>'}"></th:block>
+                    </th:block>
+                </section>
+                <footer></footer>
+            </article>
+
+            <article class='item'>
+                <header><h3>Pull Day 2</h3></header>
+                <section class='content'>
+                    <span th:text="${theClient.getExercisesUsed()[0].getExerciseName()}"></span> warm up - 10 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[8].getExerciseName()}"></span> - 5 reps, 5 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[32].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[11].getExerciseName()}"></span> - 8-12 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[12].getExerciseName()}"></span> - 8-12 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[13].getExerciseName()}"></span> - 8-12 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[47].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[34].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[35].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[22].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[48].getExerciseName()}"></span> -Superset with-
+                    <span th:text="${theClient.getExercisesUsed()[49].getExerciseName()}"></span> - 8-12 reps, 3 sets<br>
+                    <th:block th:each="exercise : ${theClient.getExercises()}">
+                        <th:block th:if="${exercise.getWorkoutDay().contains('Pull day 2')}" th:utext="${exercise.getExerciseName() + '<br>'}"></th:block>
+                    </th:block>
+                </section>
+                <footer></footer>
+            </article>
+
+            <article class ='item'>
+                <header><h3>Leg Day 2</h3></header>
+                <section class='content'>
+                    <span th:text="${theClient.getExercisesUsed()[27].getExerciseName()}"></span> warm up - 10 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[28].getExerciseName()}"></span> warm up - 10 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[26].getExerciseName()}"></span> - 5 reps, 5 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[30].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[50].getExerciseName()}"></span> -Superset with-
+                    <span th:text="${theClient.getExercisesUsed()[51].getExerciseName()}"></span> - 8-12 reps, 3 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[29].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[23].getExerciseName()}"></span> - 8-12 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[45].getExerciseName()}"></span> - 12-15 reps, 4 sets<br>
+                    <span th:text="${theClient.getExercisesUsed()[18].getExerciseName()}"></span> -Superset with-
+                    <span th:text="${theClient.getExercisesUsed()[19].getExerciseName()}"></span> - 12-15 reps, 3 sets<br>
+                    <th:block th:each="exercise : ${theClient.getExercises()}">
+                        <th:block th:if="${exercise.getWorkoutDay().contains('Leg day 2')}" th:utext="${exercise.getExerciseName()+'<br>'}"></th:block>
+                    </th:block>
+                </section>
+                <footer></footer>
+            </article>
+
+            <article class='item'>
+                <header><h3>Target muscle exercises</h3></header>
+                <section class='content'>
+                    <th:block th:each="exercise : ${theClient.getExercisesUsed()}">
+                        <th:block th:if="${exercise.getWorkoutDay().contains('Extra' + targetMuscle)}" th:utext="${exercise.getExerciseName() + '<br>'}"></th:block>
+                    </th:block>
+                </section>
+                <footer></footer>
+            </article>
+
+        </div>
+        <div class="col-sm-2 sidenav">
+            <div class="well">
+                <p>ADS</p>
+            </div>
+            <div class="well">
+                <p>ADS</p>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+    font-weight: 300;
+}
+
+.user-table {
+   
+    table-layout: fixed;
+}
+.user-table tr:nth-child(odd) {
+    background-color: rgba(22, 43, 68, 0.2);
+}
+.user-table tr:nth-child(even) {
+    background-color: rgba(222, 208, 237, 0.02);
+}
+.user-table th {
+    padding: 15px 30px;
+}
+.user-table th button {
+    border: none;
+    background-color: transparent !important;
+    font-size: 1.5em;
+}
+.fa-edit {
+    color: rgb(70, 182, 107);
+    cursor: pointer;
+}
+.fa-user-times {
+    color: rgb(218, 69, 69);
+    cursor: pointer;
+}
+#user-table-top {
+    background-color: rgba(22, 43, 68, 0.4);
+}
