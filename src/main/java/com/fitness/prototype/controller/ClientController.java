@@ -46,9 +46,7 @@ public class ClientController {
 		String targetMuscle = theClient.getTargetMuscle();
 		model.addAttribute("theClient", theClient);
 		model.addAttribute("targetMuscle", targetMuscle);
-		if (theClient.getExercisesUsed().isEmpty()) {
-			return "redirect:/client/updateWorkoutGoals";
-		} else if (theClient.getGymGoal().equals("aesthetics")) {
+		 if (theClient.getGymGoal().equals("aesthetics")) {
 			return "aesthetics-routine";
 		} else {
 			return "strength-routine";
