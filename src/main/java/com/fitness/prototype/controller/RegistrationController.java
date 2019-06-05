@@ -29,7 +29,7 @@ public class RegistrationController {
 	}
 
 	@PostMapping("/formProcessing")
-	public String registration(@Valid @ModelAttribute("theClient") Client theClient, BindingResult bindingResult) {
+	public String registration(@Valid @ModelAttribute("theClient") Client theClient, BindingResult bindingResult) throws Exception {
 		if (bindingResult.hasErrors()) {
 			return "client-form";
 		}

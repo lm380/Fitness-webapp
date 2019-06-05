@@ -53,7 +53,7 @@ public class ClientService {
 		clientRepo.save(theClient);
 	}
 	
-	public void save(Client theClient) {
+	public void save(Client theClient) throws Exception {
 		setPasswordService(theClient);
 		setRoleService(theClient);
 		int calories =(int) nutritionService.calculateCalories(theClient.getGender(),
@@ -66,29 +66,31 @@ public class ClientService {
 		clientRepo.save(theClient);
 	}
 	
-	public void setPasswordService(Client theClient) {
+	protected void setPasswordService(Client theClient) {
 		String password = theClient.getPassword();
 		String encPassword = passwordEncoder.encode(password);
 		theClient.setPassword(encPassword);
 	}
 	
-	private void setRoleService(Client theClient) {
+	protected void setRoleService(Client theClient) {
 		Set<Role> roles = new HashSet<>();
 		roles.add(roleRepo.findByRole("CLIENT"));
 		theClient.setRoles(roles);
 	}
 
-	private void setEmailService(Client theClient) {
+	protected void setEmailService(Client theClient) {
 		String email = theClient.getEmail().toLowerCase();
 		theClient.setEmail(email);
 	}
 	
-	private void setUsernameService(Client theClient) {
+	protected void setUsernameService(Client theClient) throws Exception{
 		String username = theClient.getUsername();
-		String formatUsername = username.substring(0, 1).toUpperCase() + username.substring(1).toLowerCase();
-		theClient.setUsername(formatUsername);
+		if(username.length()<2){
+			throw new Exception("username must be longer than 1 letter");
+		}
+			String formatUsername = username.substring(0, 1).toUpperCase() + username.substring(1).toLowerCase();
+			theClient.setUsername(formatUsername);
 	}
-
 
 	public Client findClientByUsername(String username) {
 		return clientRepo.findClientByUsername(username);
