@@ -17,7 +17,7 @@ import com.fitness.prototype.entity.Role;
 @Service
 public class ClientService {
 
-	public static final long SUPER_USER_ID = 1L;
+	private static final long SUPER_USER_ID = 1L;
 	private final ClientRepo clientRepo;
 
 	private final ExerciseService exerciseService;
@@ -28,7 +28,7 @@ public class ClientService {
 
 	private final NutritionService nutritionService;
 
-	public ClientService(ClientRepo clientRepo, ExerciseService exerciseService, BCryptPasswordEncoder passwordEncoder, RoleRepo roleRepo, NutritionService nutritionService) {
+	ClientService(ClientRepo clientRepo, ExerciseService exerciseService, BCryptPasswordEncoder passwordEncoder, RoleRepo roleRepo, NutritionService nutritionService) {
 		this.clientRepo = clientRepo;
 		this.exerciseService = exerciseService;
 		this.passwordEncoder = passwordEncoder;
@@ -66,24 +66,24 @@ public class ClientService {
 		clientRepo.save(theClient);
 	}
 	
-	protected void setPasswordService(Client theClient) {
+	void setPasswordService(Client theClient) {
 		String password = theClient.getPassword();
 		String encPassword = passwordEncoder.encode(password);
 		theClient.setPassword(encPassword);
 	}
 	
-	protected void setRoleService(Client theClient) {
+	void setRoleService(Client theClient) {
 		Set<Role> roles = new HashSet<>();
 		roles.add(roleRepo.findByRole("CLIENT"));
 		theClient.setRoles(roles);
 	}
 
-	protected void setEmailService(Client theClient) {
+	void setEmailService(Client theClient) {
 		String email = theClient.getEmail().toLowerCase();
 		theClient.setEmail(email);
 	}
 	
-	protected void setUsernameService(Client theClient) throws Exception{
+	void setUsernameService(Client theClient) throws Exception{
 		String username = theClient.getUsername();
 		if(username.length()<2){
 			throw new Exception("username must be longer than 1 letter");
